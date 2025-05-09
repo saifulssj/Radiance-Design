@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import portfolioData from "../data/portfolioData";
+import portfolioData from "../data/portfoliodata";
 
 const itemVariants = {
   hidden: { opacity: 0, x: 50 },
