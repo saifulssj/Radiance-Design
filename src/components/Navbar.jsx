@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Asset2xxxhdpi from '../assets/Asset 2xxxhdpi.png';
+import Asset2xxxhdpi from '/assets/Asset 2xxxhdpi.png';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);

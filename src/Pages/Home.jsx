@@ -1,5 +1,5 @@
 import portfolioData from '../data/portfoliodata';
-import ilustration from '../assets/ilustration.svg';
+import ilustration from '../../public/assets/ilustration.svg';
 import { motion } from "framer-motion";
 // (Add other components as you create them)
 
