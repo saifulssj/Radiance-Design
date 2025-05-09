@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import portfolioData from "../data/portfolioData";
+import portfolioData from "../data/portfoliodata";
 
 const Portfolio = () => {
   return (
