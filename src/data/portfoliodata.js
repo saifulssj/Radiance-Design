@@ -16,7 +16,11 @@ export const portfolioData = [
   },
   {
     title: "Packaging Design",
+<<<<<<< HEAD
     image: '/assets/packaging-design.jpeg',
+=======
+    image: "/assets/packaging-design.jpeg",
+>>>>>>> 4b22c5a1dfc4d15c645dba5bcf07a7d6e8fb6300
     description: "Creative, impactful packaging solutions that make your products stand out on the shelves and leave a memorable impression."
   },
   {
