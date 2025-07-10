@@ -1,15 +1,14 @@
-import portfolioData from '../data/portfoliodata';
-import ilustration from '../../public/assets/ilustration.svg';
+import { portfolioData, flyerDesignData } from "../data/portfoliodata.js";
+import ilustration from '../../public/assets/radiant.jpeg';
+import arrowSvg from '../../public/assets/ChatGPT Image May 18, 2025, 01_17_42 AM.png'
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
 // (Add other components as you create them)
 
 export default function Home() {
   return (
-    <div className="bg-black text-white font-sans overflow-x-hidden overflow-clip mt-8 relative">
-            <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-cyan-500 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
-            <div className="absolute top-[400px] right-[-80px] w-[400px] h-[400px] bg-blue-500 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
-            <div className="absolute top-[800px] left-[-100px] w-[400px] h-[400px] bg-cyan-500 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
-      {/* Hero Section */}
+    <div className=" font-sans overflow-x-hidden overflow-clip mt-8 relative">
 
       <section className="flex flex-col-reverse md:flex-row items-center justify-between gap-10  mt-24">
             {/* Glowing blurred orb behind the section */}
@@ -28,7 +27,7 @@ export default function Home() {
 
             {/* Animated Underline */}
             <motion.div
-                className="w-20 h-1 bg-gradient-to-r from-blue-700 via-purple-500 to-cyan-500 mx-auto rounded-full mb-6 shadow-md shadow-pink-500/30"
+                className="w-20 h-1 bg-gradient-to-r from-blue-700  to-cyan-500 mx-auto rounded-full mb-6 shadow-md shadow-pink-500/30"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 2.8 }}
@@ -36,7 +35,7 @@ export default function Home() {
 
             {/* Animated Paragraph */}
             <motion.p
-                className="text-gray-300 text-lg leading-relaxed"
+                className="text-black-300 text-lg leading-relaxed"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 2.8, ease: "easeOut" }}
@@ -68,9 +67,9 @@ export default function Home() {
             {portfolioData.map(({ title }, i) => (
             <div
                 key={i}
-                className="bg-[#111] p-6 rounded-xl transition transform duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                className=" p-6 rounded-xl transition transform duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-gray-400 text-sm">
+                <p className=" text-sm">
                 {title === "Brand Identity" && "Logos, guidelines, and more to define your brand’s voice and style."}
                 {title === "Flyer Design" && "Eye-catching flyers that grab attention and convey your message."}
                 {title === "Menu Design" && "Menus that not only list items but tell a story."}
@@ -86,13 +85,13 @@ export default function Home() {
 
       <section className="py-20 px-6 max-w-6xl mx-auto text-center">
   <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-700  to-cyan-500">Selected Work</h2>
-  <p className="text-gray-400 mb-10">From logos to full brand systems — here's a glimpse of our creative power.</p>
+  <p className="text-gray-600 mb-10">From logos to full brand systems — here's a glimpse of our creative power.</p>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     {/* Portfolio Items */}
     {portfolioData.map((item, index) => (
-      <div key={index} className="card bg-gradient-to-b from-blue-500 via-purple-500 to-pink-600  m-4" tabIndex="0">
-        <div className="card2">
+      <div key={index} className=" m-4" tabIndex="0">
+        <div className="  border-b-gray-300 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden">
         {/* Gradient border + outer glow */}
 
         {/* Inner card */}
@@ -101,7 +100,7 @@ export default function Home() {
             alt={item.title}
             className="w-full h-60 object-cover rounded-t-xl"
           />
-          <div className="bg-transparent bg-opacity- text-white text-sm p-4 rounded-b-xl text-center">
+          <div className="bg-white text-sm p-4 rounded-b-xl text-center">
             {item.title}
           </div>
         </div>
@@ -113,13 +112,66 @@ export default function Home() {
 
 
       {/* Contact CTA */}
-      <section className="py-20 px-6 text-center bg-gradient-to-r from-[#bfa76f] to-white text-black">
-        <h2 className="text-3xl font-bold mb-4">Let's Create Something Radiant</h2>
-        <p className="mb-6">Have a project in mind? Let’s talk and make it shine.</p>
-        <button className="bg-black text-white px-6 py-2 rounded-full hover:scale-105 transition">
-          Contact Us
-        </button>
-      </section>
+  <section className="relative bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-12 px-6 text-center overflow-hidden">
+      {/* Overlay background icons (optional) */}
+      <div className="absolute inset-0 opacity-10 bg-[url('/assets/cta-bg.jpg')] bg-cover bg-center pointer-events-none" />
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          LET'S TALK ABOUT <br /> YOUR PROJECT
+        </h2>
+        <p className="text-lg mb-6">
+          Got a project in mind? Let's create something great. <br />
+          I can transform that idea into real product.
+        </p>
+
+        <div className="flex items-center justify-center  gap-3">
+          {/* SVG on the left */}
+          <img src={arrowSvg} alt="arrow" className="w-20 h-20 md:w-30 md:h-30" />
+
+          {/* Contact Me Button */}
+          <Link to="/contact">
+            <button className="bg-white text-[#0d1b2a] px-8 py-2 rounded-xl font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-110">
+              Contact Me
+            </button>
+          </Link>
+        </div>
+
+        {/* Contact Info Row */}
+        <div className="mt-2 flex flex-col md:flex-row items-center justify-center gap-2 text-base font-medium">
+          <a
+            href="https://wa.me/+8801990541935"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="WhatsApp"
+            className="flex items-center gap-2 mx-2 hover:text-green-400 transition-colors"
+          >
+            <FaWhatsapp className="text-green-400 hover:text-green-300" />
+            <span>01990 - 541 935</span>
+          </a>
+          <a
+            href="https://facebook.com/mdraselsheikh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 mx-2 hover:text-blue-500 transition-colors"
+            title="Facebook"
+          >
+            <FaFacebookF className="text-blue-500 hover:text-blue-400 bg-white rounded-full p-1" />
+            <span>@mdraselsheikh</span>
+          </a>
+          <a
+            href="https://instagram.com/radiancedesign13"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 mx-2 hover:text-pink-500 transition-colors"
+            title="Instagram"
+          >
+            <FaInstagram className="text-pink-500 hover:text-pink-400" />
+            <span>@radiancedesign13</span>
+          </a>
+        </div>
+      </div>
+    </section>
     </div>
   );
 }

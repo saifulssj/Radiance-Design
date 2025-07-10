@@ -36,7 +36,7 @@ export default function Navbar() {
     <header
       className={`w-full fixed top-0 left-0 z-50 px-6 py-4 flex items-center justify-between transition-transform duration-500 ${
         showNavbar ? 'translate-y-0' : '-translate-y-full'
-      } bg-black/80 backdrop-blur-md`}
+      } bg-white/80 backdrop-blur-md`}a
     >
       {/* Logo */}
       <div className="text-xl font-bold ">

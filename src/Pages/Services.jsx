@@ -1,6 +1,7 @@
+
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import portfolioData from "../data/portfoliodata";
+import { portfolioData } from "../data/portfoliodata";
 
 const itemVariants = {
   hidden: { opacity: 0, x: 50 },
@@ -108,8 +109,8 @@ const Services = () => {
   }, [currentIndex]);
 
   return (
-    <section className="relative py-28 overflow-hidden">
-      <h2 className="text-4xl font-bold text-center mb-12 text-blue-500">
+    <section className="relative py-28 overflow-hidden bg-white">
+      <h2 className="text-4xl font-bold text-center mb-12 text-blue-700 tracking-wide drop-shadow-lg">
         Our Services
       </h2>
 
@@ -124,7 +125,7 @@ const Services = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="flex-none w-[90vw] md:w-[60vw] lg:w-[50vw] lg:h-[380px] snap-center bg-black rounded-2xl p-6 shadow-lg border border-blue-800/40 hover:scale-[1.02] transition duration-300"
+            className="flex-none w-[90vw] md:w-[60vw] lg:w-[50vw] lg:h-[380px] snap-center bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:scale-[1.02] transition duration-300"
             onClick={() => handleCardClick(index)}
           >
             <div
@@ -133,17 +134,18 @@ const Services = () => {
               }`}
             >
               <div className="md:w-1/2 w-full">
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover rounded-xl"
                 />
               </div>
               <div className="md:w-1/2 w-full space-y-4 text-left">
-                <h3 className="text-3xl font-semibold text-blue-300">
+                <h3 className="text-3xl font-semibold text-blue-700 tracking-wide">
                   {item.title}
                 </h3>
-                <p className="text-gray-400 text-base leading-relaxed">
+                <p className="text-gray-700 text-base leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -152,9 +154,9 @@ const Services = () => {
         ))}
       </div>
 
-      {/* Decorative Globes */}
-      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-cyan-500 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
-      <div className="absolute bottom-[-120px] right-[-80px] w-[400px] h-[400px] bg-blue-500 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
+      {/* Decorative Globes (light theme) */}
+      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-cyan-200 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
+      <div className="absolute bottom-[-120px] right-[-80px] w-[400px] h-[400px] bg-blue-200 blur-3xl opacity-20 rounded-full pointer-events-none z-0"></div>
     </section>
   );
 };

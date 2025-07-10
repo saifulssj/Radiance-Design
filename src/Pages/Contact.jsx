@@ -1,118 +1,171 @@
-import emailjs from 'emailjs-com';
-import { useState } from 'react';
-import { FaFacebookMessenger, FaWhatsapp } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import { FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const SERVICE_ID = "your_service_id";
+const TEMPLATE_ID = "your_template_id";
+const USER_ID = "your_user_id";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const sendEmail = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSent(false);
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        e.target,
-        import.meta.env.VITE_PUBLIC_key
-      )
-      .then(() => {
-        alert('✅ Message Sent Successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      })
-      .catch((error) => {
-        alert('❌ Oops, something went wrong', error);
-      });
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          subject: form.subject,
+          message: form.message,
+        },
+        USER_ID
+      );
+      setSent(true);
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      setError("Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section
-      id="Contact"
-      className="min-h-screen flex flex-col items-center justify-center py-24 px-6 bg-black"
+    <div
+      className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden mt-16"
+      style={{ fontFamily: 'Manrope, "Noto Sans", sans-serif' }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="max-w-2xl w-full glassy rounded-2xl p-8 backdrop-blur-md border border-white/10 shadow-xl"
-      >
-        <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
-          Get in Touch
-        </h2>
-
-        <form onSubmit={sendEmail} className="space-y-6">
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
-            placeholder="Your Name"
-            required
-            className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition duration-200"
-          />
-
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            placeholder="you@example.com"
-            required
-            className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-          />
-
-          <textarea
-            rows="5"
-            name="message"
-            value={formData.message}
-            onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
-            }
-            placeholder="Write your message..."
-            required
-            className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200 resize-none"
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-blue-600 hover:to-pink-500 text-white font-semibold py-3 rounded-xl shadow-lg transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
-
-        {/* Social Contact Links */}
-        <div className="mt-10 flex justify-center gap-6">
-          <a
-            href="https://wa.me/+8801990541935" // Replace with your actual WhatsApp number
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-400 hover:text-green-300 text-2xl transition duration-200"
-            title="WhatsApp"
-          >
-            <FaWhatsapp />
-          </a>
-          <a
-            href="https://www.facebook.com/radiancedesign13/" // Replace with your actual Facebook page
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-400 text-2xl transition duration-200"
-            title="Facebook"
-          >
-            <FaFacebookMessenger />
-          </a>
+      <div className="layout-container flex h-full grow flex-col">
+        <div className="px-40 flex flex-1 justify-center py-5">
+          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap justify-between gap-3 p-4">
+              <div className="flex min-w-72 flex-col gap-3">
+                <p className="text-blue-700 tracking-light text-[32px] font-bold leading-tight">Get in touch</p>
+                <p className="text-[#60758a] text-sm font-normal leading-normal">
+                  We're here to help and answer any questions you might have. We look forward to hearing from you
+                </p>
+              </div>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                  <input
+                    name="name"
+                    placeholder="Your Name"
+                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-14 placeholder:text-[#60758a] p-4 text-base font-normal leading-normal"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              </div>
+              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Your Email"
+                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-14 placeholder:text-[#60758a] p-4 text-base font-normal leading-normal"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              </div>
+              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                  <input
+                    name="subject"
+                    placeholder="Subject"
+                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-14 placeholder:text-[#60758a] p-4 text-base font-normal leading-normal"
+                    value={form.subject}
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none min-h-36 placeholder:text-[#60758a] p-4 text-base font-normal leading-normal"
+                    value={form.message}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                </label>
+              </div>
+              <div className="flex px-4 py-3 justify-start">
+                <button
+                  type="submit"
+                  className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                  disabled={loading}
+                >
+                  <span className="truncate">{loading ? "Sending..." : "Send Message"}</span>
+                </button>
+              </div>
+              {sent && (
+                <div className="px-4 py-2 text-green-600 font-medium">Your message has been sent!</div>
+              )}
+              {error && (
+                <div className="px-4 py-2 text-red-600 font-medium">{error}</div>
+              )}
+            </form>
+            <h3 className="text-blue-700 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Contact Information</h3>
+            <p className="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">Email: contact@radiancedesign.com</p>
+            <p className="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">Phone: +880 1990-541935</p>
+            <div className="flex px-4 py-3 gap-4 items-center">
+              <a
+                href="https://www.facebook.com/radiancedesign13/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0c7ff2] text-2xl"
+                aria-label="Facebook"
+              >
+                <FaFacebookMessenger />
+              </a>
+              <a
+                href="https://wa.me/+8801990541935"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#25d366] text-2xl"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp />
+              </a>
+            </div>
+            <div className="flex px-4 py-3">
+              <div
+                className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg object-cover"
+                style={{
+                  backgroundImage:
+                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmXrUrUjJw0KsvErJ46bPkrTE7wPDTe3CHRNNKYWHznUu2cqZO9KZ865cpS2lkqwz42Bx1UTmYKlddaITegh4htJko21WSfSX8CAi10kysLhn3n_9tSgLfWLRMjFDGPM3sXRQ2SvIq0fnY3hdYLt9YXzcGCbpCNBeVhLNaYeTtrdlsP6k8CMynthpHcolHAHNTm-TD5VM_z895kylcMB_-PTVz9XmdzyvJbCksqx2Nw9ydsf28ZKBN0WuFDyA_M9FGp-0EjBAXQ6U")',
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </section>
+      </div>
+    </div>
   );
 };
 

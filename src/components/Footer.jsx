@@ -3,13 +3,20 @@ import { FaFacebookF, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-white/10 text-white py-8 px-4 mt-12">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-sm text-gray-400 text-center md:text-left">
+    <footer className="flex justify-center">
+                  <div className="flex max-w-[960px] flex-1 flex-col">
+            <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
+                <a className="text-[#60758a] text-base font-normal leading-normal min-w-40" href="/src/Pages/Home.jsx">Home</a>
+                <a className="text-[#60758a] text-base font-normal leading-normal min-w-40" href="/src/Pages/Services.jsx">Services</a>
+                <a className="text-[#60758a] text-base font-normal leading-normal min-w-40" href="/src/Pages/Portfolio.jsx">Portfolio</a>
+                <a className="text-[#60758a] text-base font-normal leading-normal min-w-40" href="/src/Pages/About.jsx">About</a>
+                <a className="text-[#60758a] text-base font-normal leading-normal min-w-40" href="/src/Pages/Contact.jsx">Contact</a>
+              </div>
+                      <p className="text-sm text-gray-400 text-center ">
           &copy; {new Date().getFullYear()} Radiance Design. All rights reserved.
         </p>
-
-        <div className="flex gap-5 text-lg">
+          <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
           <a
             href="https://facebook.com/yourprofile"
             target="_blank"
@@ -32,10 +39,14 @@ const Footer = () => {
           >
             <FaEnvelope />
           </a>
+          </div>
+          </div>
         </div>
-      </div>
     </footer>
   );
 };
 
 export default Footer;
+
+
+    
